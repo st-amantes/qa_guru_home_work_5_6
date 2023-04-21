@@ -1,4 +1,3 @@
-# qa_guru_home_work_5_6
 from datetime import time
 
 def test_dark_theme_by_time():
@@ -7,7 +6,10 @@ def test_dark_theme_by_time():
     """
     current_time = time(hour=23)
     # TODO переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
-    is_dark_theme = None
+    if 22 <= current_time.hour <= 23 or 0 <= current_time.hour <= 6:
+        is_dark_theme = True
+    else:
+        is_dark_theme = False
     assert is_dark_theme is True
 
 def test_dark_theme_by_time_and_user_choice():
@@ -18,11 +20,22 @@ def test_dark_theme_by_time_and_user_choice():
     dark_theme_enabled_by_user = False - Темная тема выключена
     dark_theme_enabled_by_user = None - Пользователь не сделал выбор (используется переключение по времени системы)
     """
+    global is_dark_theme
     current_time = time(hour=16)
     dark_theme_enabled_by_user = True
     # TODO переключите темную тему в зависимости от времени суток,
     #  но учтите что темная тема может быть включена вручную
-    is_dark_theme = None
+
+    if dark_theme_enabled_by_user == True:
+        is_dark_theme = True
+    elif dark_theme_enabled_by_user == False:
+        is_dark_theme = False
+
+    elif dark_theme_enabled_by_user == None:
+        if 22 <= current_time.hour or current_time.hour <= 6:
+            is_dark_theme = True
+        else:
+            is_dark_theme = False
     assert is_dark_theme is True
 
 def test_find_suitable_user():
@@ -38,9 +51,16 @@ def test_find_suitable_user():
     ]
     # TODO найдите пользователя с именем "Olga"
     suitable_users = None
+    for k in users:
+        if k['name'] == "Olga":
+            suitable_users = k
     assert suitable_users == {"name": "Olga", "age": 45}
-    # TODO найдите всех пользователей младше 20 лет
-    suitable_users = None
+
+    # # TODO найдите всех пользователей младше 20 лет
+    suitable_users = []
+    for k in users:
+        if k['age'] < 20:
+            suitable_users.append(k)
     assert suitable_users == [
         {"name": "Stanislav", "age": 15},
         {"name": "Maria", "age": 18},
