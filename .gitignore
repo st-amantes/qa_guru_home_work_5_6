@@ -1,3 +1,5 @@
-/venv
-/def_passed.py
+./venv
+def_passed.py
+.pytest_cache
+.idea
 

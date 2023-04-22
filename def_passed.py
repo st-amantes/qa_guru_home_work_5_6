@@ -82,7 +82,7 @@ def test_readable_function():
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
 def open_browser(browser_name):
-    actual_result = None
+    actual_result = (open_browser.__name__.replace('_','').title() + f'[{browser_name}]')
     assert actual_result == "Open Browser [Chrome]"
 
 def go_to_companyname_homepage(page_url):
