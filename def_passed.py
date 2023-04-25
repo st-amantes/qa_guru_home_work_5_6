@@ -81,18 +81,18 @@ def test_readable_function():
     go_to_companyname_homepage(page_url="https://companyname.com")
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
+def func_name_and_argument(func, *args):
+    result_text = func.__name__.replace("_"," ").title() + f' [{", ".join(args)}]'
+    print(result_text)
+    return result_text
 def open_browser(browser_name):
-    actual_result = (open_browser.__name__.replace('_',' ').title() + f' [{browser_name}]')
-    print(end='\n')
-    print(actual_result, end='\n')
+    actual_result = func_name_and_argument(open_browser, browser_name)
     assert actual_result == "Open Browser [Chrome]"
 
 def go_to_companyname_homepage(page_url):
-    actual_result = go_to_companyname_homepage.__name__.replace("_", " ").title() + f" [{page_url}]"
-    print(actual_result, end='\n')
+    actual_result = func_name_and_argument(go_to_companyname_homepage, page_url)
     assert actual_result == "Go To Companyname Homepage [https://companyname.com]"
 
 def find_registration_button_on_login_page(page_url, button_text):
-    actual_result = find_registration_button_on_login_page.__name__.replace("_", " ").title() + f" [{page_url}, {button_text}]"
-    print(actual_result, end='\n')
+    actual_result = func_name_and_argument(find_registration_button_on_login_page, page_url, button_text)
     assert actual_result == "Find Registration Button On Login Page [https://companyname.com/login, Register]"
